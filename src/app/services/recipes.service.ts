@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Recipe } from '../models/recipe.component';
+import { Recipe } from '../models/recipe.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +11,17 @@ export class RecipesService {
   constructor() {
     this.recipes = [
       {
-        title: 'Mutter Paneer',
-        description: 'desc',
-        imageURL: '',
+        title: 'Matar Paneer',
+        description: 'Mattar paneer is a vegetarian north Indian dish consisting of peas and paneer in a tomato based sauce, spiced with garam masala.',
+        imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Matar-Paneer.JPG/640px-Matar-Paneer.JPG',
         ingredients: [
-          { name: 'Mutter', amount: 2 }
+          { name: 'green pea', amount: 2 }
         ]
       },
       {
         title: 'Butter Chicken',
         description: 'desc',
-        imageURL: '',
+        imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Chicken_makhani.jpg/640px-Chicken_makhani.jpg',
         ingredients: [
           { name: 'chicken', amount: 2 }
         ]
@@ -37,9 +37,12 @@ export class RecipesService {
     this.recipes.push(recipe);
   }
 
-  removeRecipe(recipe:Recipe){
-    this.recipes.splice(this.recipes.findIndex(
-      (currentRecipe:Recipe) => {return recipe.title === currentRecipe.title}
-    ),1);
+  getRecipe(index: number){
+    console.log('get'+index);
+    return this.recipes[index];
+  }
+
+  removeRecipe(index: number){
+    this.recipes.splice(index,1);
   }
 }
