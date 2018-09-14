@@ -15,7 +15,8 @@ export class RecipesService {
         description: 'Mattar paneer is a vegetarian north Indian dish consisting of peas and paneer in a tomato based sauce, spiced with garam masala.',
         imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Matar-Paneer.JPG/640px-Matar-Paneer.JPG',
         ingredients: [
-          { name: 'green pea', amount: 2 }
+          { name: 'green pea', amount: 2 },
+          { name: 'paneer', amount: 5}
         ]
       },
       {

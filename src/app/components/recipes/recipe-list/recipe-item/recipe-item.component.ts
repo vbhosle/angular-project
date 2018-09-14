@@ -9,10 +9,12 @@ import { Recipe } from '../../../../models/recipe.model';
 export class RecipeItemComponent implements OnInit {
 
   @Input() recipe: Recipe;
+  @Input() index: number;
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.index)
   }
 
 }

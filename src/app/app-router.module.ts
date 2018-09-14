@@ -5,8 +5,9 @@ import { NgModule } from '@angular/core';
 import { RecipeDetailComponent } from './components/recipes/recipe-detail/recipe-detail.component';
 
 const appRoutes: Routes = [
-    { path:'recipes', component: RecipesComponent },
-    { path:'recipes/:index', component: RecipeDetailComponent},
+    { path:'recipes', component: RecipesComponent, children:[
+        { path:':index', component: RecipeDetailComponent}
+    ]},
     { path:'shopping-list', component: ShoppingListComponent },
     { path:'', redirectTo: 'recipes', pathMatch: 'full' },
 ];
