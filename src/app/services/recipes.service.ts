@@ -16,7 +16,7 @@ export class RecipesService {
         imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Matar-Paneer.JPG/640px-Matar-Paneer.JPG',
         ingredients: [
           { name: 'green pea', amount: 2 },
-          { name: 'paneer', amount: 5}
+          { name: 'paneer', amount: 5 }
         ]
       },
       {
@@ -35,45 +35,45 @@ export class RecipesService {
         imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Puneri_Ukadiche_Modak.jpg/640px-Puneri_Ukadiche_Modak.jpg',
         ingredients: [
           { name: 'Jaggery', amount: 1 },
-          { name: 'Fresh coconut', amount: 1},
-          { name: 'rice flour', amount : 1}
+          { name: 'Fresh coconut', amount: 1 },
+          { name: 'rice flour', amount: 1 }
         ]
       }
     ];
   }
 
-  getAllRecipes():Recipe[]{
+  getAllRecipes(): Recipe[] {
     return this.recipes.slice();
   }
 
-  addRecipe(recipe:Recipe){
-    console.log('recipes.length: before '+ this.recipes.length)
+  addRecipe(recipe: Recipe) {
+    console.log('recipes.length: before ' + this.recipes.length)
     this.recipes.push(recipe);
-    console.log('recipes.length: after '+ this.recipes.length)
+    console.log('recipes.length: after ' + this.recipes.length)
   }
 
-  updateRecipe(index:number, recipe: Recipe){
+  updateRecipe(index: number, recipe: Recipe) {
     console.log('updateRecipe');
     console.log(recipe);
-    if(this.isValidIndex(index)){
+    if (this.isValidIndex(index)) {
       this.recipes[index] = recipe;
     }
   }
 
-  getRecipe(index: number){
-    if(!this.isValidIndex(index)){
+  getRecipe(index: number) {
+    if (!this.isValidIndex(index)) {
       return null;
     }
     return this.recipes[index];
   }
 
-  removeRecipe(index: number){
-    if(this.isValidIndex(index)){
-      this.recipes.splice(index,1);
+  removeRecipe(index: number) {
+    if (this.isValidIndex(index)) {
+      this.recipes.splice(index, 1);
     }
   }
 
-  isValidIndex(index: number):boolean{
-    return !(isNaN(index) || index>=this.recipes.length || index<0);
+  isValidIndex(index: number): boolean {
+    return !(isNaN(index) || index >= this.recipes.length || index < 0);
   }
 }

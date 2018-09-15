@@ -1,15 +1,16 @@
 <div class="panel panel-primary" *ngIf="recipe; else recipeNotFound">
   <div class="panel-heading">
-      <h4>
-        {{ recipe.title }} 
-        <button type="button" class="btn btn-primary">
-          <span class="glyphicon glyphicon-pencil"></span> 
-        </button>
-        <button type="button" class="btn btn-danger">
-            <span class="glyphicon glyphicon-trash"></span> 
-          </button>
+    <h4>
+      {{ recipe.title }}
+      <button type="button" class="btn btn-primary" (click)="onEdit()">
+        <span class="glyphicon glyphicon-pencil"></span>
+      </button>
+      <button type="button" class="btn btn-danger" (click)="onDelete()">
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
     </h4>
   </div>
+
   <div class="panel-body">
     <img class="image-responsive img-thumbnail center-block" [src]="recipe.imageURL" [alt]="recipe.title" style="max-height: 250px">
     <hr>
@@ -18,11 +19,13 @@
     <h3 class="text-muted">Ingredients</h3>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
-          <span class="badge pull-left" [style.backgroundColor]="'#337ab7'">{{ingredient.amount}}</span> {{ ingredient.name }}
+        <span class="badge pull-left" [style.backgroundColor]="'#337ab7'">{{ingredient.amount}}</span> {{
+        ingredient.name }}
       </li>
     </ul>
   </div>
 </div>
+
 <ng-template #recipeNotFound>
   <h3>Recipe not found!</h3>
 </ng-template>
