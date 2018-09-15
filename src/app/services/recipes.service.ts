@@ -20,11 +20,23 @@ export class RecipesService {
         ]
       },
       {
-        title: 'Butter Chicken',
-        description: 'desc',
-        imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Chicken_makhani.jpg/640px-Chicken_makhani.jpg',
+        title: 'Pav Bhaji',
+        description: 'Pav bhaji is a fast food dish from India, consisting of a thick vegetable curry, fried and served with a soft bread roll.',
+        imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Pav_bhaji_from_Mumbai.JPG/640px-Pav_bhaji_from_Mumbai.JPG',
         ingredients: [
-          { name: 'chicken', amount: 2 }
+          { name: 'mix vegetables', amount: 4 },
+          { name: 'potatos', amount: 4 },
+          { name: 'onions', amount: 4 }
+        ]
+      },
+      {
+        title: 'Ukadiche Modak',
+        description: ' The sweet filling on the inside of a modak consists of freshly grated coconut and jaggery while the outer soft shell is made from rice flour or wheat flour mixed with khava or maida flour.',
+        imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Puneri_Ukadiche_Modak.jpg/640px-Puneri_Ukadiche_Modak.jpg',
+        ingredients: [
+          { name: 'Jaggery', amount: 1 },
+          { name: 'Fresh coconut', amount: 1},
+          { name: 'rice flour', amount : 1}
         ]
       }
     ];
@@ -35,15 +47,33 @@ export class RecipesService {
   }
 
   addRecipe(recipe:Recipe){
+    console.log('recipes.length: before '+ this.recipes.length)
     this.recipes.push(recipe);
+    console.log('recipes.length: after '+ this.recipes.length)
+  }
+
+  updateRecipe(index:number, recipe: Recipe){
+    console.log('updateRecipe');
+    console.log(recipe);
+    if(this.isValidIndex(index)){
+      this.recipes[index] = recipe;
+    }
   }
 
   getRecipe(index: number){
-    console.log('get'+index);
+    if(!this.isValidIndex(index)){
+      return null;
+    }
     return this.recipes[index];
   }
 
   removeRecipe(index: number){
-    this.recipes.splice(index,1);
+    if(this.isValidIndex(index)){
+      this.recipes.splice(index,1);
+    }
+  }
+
+  isValidIndex(index: number):boolean{
+    return !(isNaN(index) || index>=this.recipes.length || index<0);
   }
 }

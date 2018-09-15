@@ -10,6 +10,8 @@ import { RecipeListComponent } from './components/recipes/recipe-list/recipe-lis
 import { ShoppingListComponent } from './components/shopping-list/shopping-list.component';
 import { AppRouterModule } from './app-router.module';
 import { RecipesService } from './services/recipes.service';
+import { RecipeFormComponent } from './components/recipes/recipe-form/recipe-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,13 @@ import { RecipesService } from './services/recipes.service';
     RecipeDetailComponent,
     RecipeItemComponent,
     RecipeListComponent,
-    ShoppingListComponent
+    ShoppingListComponent,
+    RecipeFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRouterModule
   ],
   providers: [ RecipesService ],
