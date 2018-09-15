@@ -76,6 +76,8 @@ export class RecipeFormComponent implements OnInit {
       //existing recipe - edit
       this.recipeService.updateRecipe(this.index, this.recipeForm.value);
     }
+
+    this.router.navigate(['/recipes']);
   }
 
   createIngredient(){
