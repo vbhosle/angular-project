@@ -4,6 +4,7 @@ import { ShoppingListComponent } from './components/shopping-list/shopping-list.
 import { NgModule } from '@angular/core';
 import { RecipeDetailComponent } from './components/recipes/recipe-detail/recipe-detail.component';
 import { RecipeFormComponent } from './components/recipes/recipe-form/recipe-form.component';
+import { ShoppingListEditComponent } from './components/shopping-list/shopping-list-edit/shopping-list-edit.component';
 
 const appRoutes: Routes = [
     { path:'recipes', component: RecipesComponent, children:[
@@ -11,7 +12,8 @@ const appRoutes: Routes = [
         { path:':index', component: RecipeDetailComponent},
         { path:':index/edit', component: RecipeFormComponent}
     ]},
-    { path:'shopping-list', component: ShoppingListComponent },
+    { path:'shopping-list', component: ShoppingListComponent},
+    { path:'shopping-list/edit', component: ShoppingListEditComponent},
     { path:'', redirectTo: 'recipes', pathMatch: 'full' },
 ];
 

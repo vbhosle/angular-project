@@ -49,15 +49,11 @@ export class RecipesService {
   }
 
   addRecipe(recipe: Recipe) {
-    console.log('recipes.length: before ' + this.recipes.length)
     this.recipes.push(recipe);
-    console.log('recipes.length: after ' + this.recipes.length)
     this.recipeUpdates.next(this.recipes.slice());
   }
 
   updateRecipe(index: number, recipe: Recipe) {
-    console.log('updateRecipe');
-    console.log(recipe);
     if (this.isValidIndex(index)) {
       this.recipes[index] = recipe;
       this.recipeUpdates.next(this.recipes.slice());

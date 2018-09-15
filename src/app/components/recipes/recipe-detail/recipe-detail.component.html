@@ -16,7 +16,14 @@
     <hr>
     <p class="text-info description">{{ recipe.description }}</p>
     <hr>
-    <h3 class="text-muted">Ingredients</h3>
+    <h3 class="text-muted">
+      Ingredients
+      <button type="button" class="btn btn-success" (click)="toShoppingList()">
+        To shopping list
+         <span class="glyphicon glyphicon-arrow-right"></span>
+         <span class="glyphicon glyphicon-list-alt"></span>
+      </button>
+    </h3>
     <ul class="list-group" style="font-family: cursive; font-size: 120%">
       <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
         <span class="badge pull-left" [style.backgroundColor]="'#337ab7'">{{ingredient.amount}}</span> {{

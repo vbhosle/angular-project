@@ -51,7 +51,7 @@ export class RecipeFormComponent implements OnInit {
 
         ingredients.forEach(
           (ingredient: Ingredient) =>{
-              let control: FormGroup = this.createIngredient();
+              let control: FormGroup = this.createIngredientFormGroup();
               control.setValue({
                 'name': ingredient.name,
                 'amount': ingredient.amount
@@ -67,7 +67,6 @@ export class RecipeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.recipeForm.value);
     if(isNaN(this.index)){
       //new recipe - add
       this.recipeService.addRecipe(this.recipeForm.value);
@@ -80,7 +79,7 @@ export class RecipeFormComponent implements OnInit {
     this.router.navigate(['/recipes']);
   }
 
-  createIngredient(){
+  createIngredientFormGroup(){
     return new FormGroup({
       'name': new FormControl(null, Validators.required),
       'amount': new FormControl(null, [Validators.required,Validators.min(1)])
@@ -88,7 +87,7 @@ export class RecipeFormComponent implements OnInit {
   }
 
   onAddIngredient() {
-    const ingredient:FormGroup = this.createIngredient();
+    const ingredient:FormGroup = this.createIngredientFormGroup();
     
     (<FormArray>this.recipeForm.get('ingredients')).insert(0,ingredient);
   }

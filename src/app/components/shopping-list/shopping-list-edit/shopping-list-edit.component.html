@@ -1,0 +1,21 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="shoppingListForm">
+  <h4>Ingredients <button type="button" class="btn btn-success" (click)="onAddIngredient()">Add</button></h4>
+  <div class="form-group" formArrayName="ingredients" *ngFor="let ingredientControl of shoppingListForm.get('ingredients').controls;let i =index">
+    <div class="row" [formGroupName]="i">
+      <div class="col-md-8">
+        <input type="text" class="form-control" formControlName="name">
+      </div>
+      <div class="col-md-2">
+        <input type="number" class="form-control" formControlName="amount">
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
+      </div>
+    </div>
+  </div>
+  <div class="btn-group">
+    <button type="submit" class="btn btn-success" [disabled]="!shoppingListForm.valid">Save</button>
+    <button type="button" class="btn btn-warning" (click)="initData()">Reset</button>
+    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+  </div>
+</form>
