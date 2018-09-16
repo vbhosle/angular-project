@@ -3,13 +3,14 @@ import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ShoppingListService } from '../../../services/shopping-list.service';
 import { Ingredient } from '../../../models/ingredient.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CanDeactivateGuard } from '../../../can-deactivate-guard.service';
 
 @Component({
   selector: 'shopping-list-edit',
   templateUrl: './shopping-list-edit.component.html',
   styleUrls: ['./shopping-list-edit.component.css']
 })
-export class ShoppingListEditComponent implements OnInit {
+export class ShoppingListEditComponent implements OnInit, CanDeactivateGuard {
 
   private shoppingListForm: FormGroup;
 
@@ -24,11 +25,7 @@ export class ShoppingListEditComponent implements OnInit {
   }
 
   initData(){
-    this.shoppingListForm.setValue({
-      'ingredients': []
-    });
-    
-
+   
     this.shoppingListService.getShoppingList().forEach(
       (ingredient: Ingredient) =>{
           let control: FormGroup = this.createIngredientFormGroup();
@@ -53,10 +50,14 @@ export class ShoppingListEditComponent implements OnInit {
     const ingredient:FormGroup = this.createIngredientFormGroup();
     
     (<FormArray>this.shoppingListForm.get('ingredients')).insert(0,ingredient);
+    this.shoppingListForm.markAsDirty();
+    this.shoppingListForm.markAsTouched();
   }
 
   onDeleteIngredient(index: number){
     (<FormArray>this.shoppingListForm.get('ingredients')).removeAt(index);
+    this.shoppingListForm.markAsDirty();
+    this.shoppingListForm.markAsTouched();
   }
 
   onCancel(){
@@ -65,8 +66,15 @@ export class ShoppingListEditComponent implements OnInit {
 
   onSubmit(){
     this.shoppingListService.setShoppingList(this.shoppingListForm.get('ingredients').value);
+    this.shoppingListForm.reset(this.shoppingListForm.value);
     this.router.navigate(['/shopping-list']);
   }
 
-
+  canDeactivate(){
+    console.log('can deactivate');
+    if(!this.shoppingListForm.pristine){
+      return confirm('Changes will be lost. Do you want to proceed without saving?');
+    }
+    return this.shoppingListForm.pristine;
+  }
 }

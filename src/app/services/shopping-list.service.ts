@@ -22,7 +22,7 @@ export class ShoppingListService{
     addIngredientsToShoppingList(ingredients: Ingredient[]){
         ingredients.forEach(
             (ingredient:Ingredient) => {
-                this.mergeIngredient(ingredient);
+                this.mergeIngredient({name: ingredient.name, amount: ingredient.amount});
             }
         );
         this.shoppingListUpdates.next(this.shoppingList.slice());

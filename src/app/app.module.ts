@@ -14,6 +14,7 @@ import { RecipeFormComponent } from './components/recipes/recipe-form/recipe-for
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShoppingListService } from './services/shopping-list.service';
 import { ShoppingListEditComponent } from './components/shopping-list/shopping-list-edit/shopping-list-edit.component';
+import { CanDeactivateGuard } from './can-deactivate-guard.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { ShoppingListEditComponent } from './components/shopping-list/shopping-l
     ReactiveFormsModule,
     AppRouterModule
   ],
-  providers: [ RecipesService, ShoppingListService ],
+  providers: [ RecipesService, ShoppingListService, CanDeactivateGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

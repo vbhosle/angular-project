@@ -4,13 +4,14 @@ import { NgForm, FormGroup, FormControl, FormArray, Validators } from '@angular/
 import { Recipe } from '../../../models/recipe.model';
 import { RecipesService } from '../../../services/recipes.service';
 import { Ingredient } from '../../../models/ingredient.model';
+import { CanDeactivateGuard } from '../../../can-deactivate-guard.service';
 
 @Component({
   selector: 'recipe-form',
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.css']
 })
-export class RecipeFormComponent implements OnInit {
+export class RecipeFormComponent implements OnInit, CanDeactivateGuard {
 
   index: number;
   recipeForm: FormGroup;
@@ -76,6 +77,7 @@ export class RecipeFormComponent implements OnInit {
       this.recipeService.updateRecipe(this.index, this.recipeForm.value);
     }
 
+    this.recipeForm.reset(this.recipeForm.value);
     this.router.navigate(['/recipes']);
   }
 
@@ -94,9 +96,20 @@ export class RecipeFormComponent implements OnInit {
 
   onDeleteIngredient(index: number){
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
+    this.recipeForm.markAsTouched();
+    this.recipeForm.markAsDirty();
   }
 
   onCancel(){
-    this.router.navigate(['..'], {relativeTo: this.route});
+    console.log(this.recipeForm.get('ingredients'));
+    this.router.navigate(['/recipes'], {relativeTo: this.route});
+  }
+
+  canDeactivate(){
+    console.log('can deactivate');
+    if(!this.recipeForm.pristine){
+      return confirm('Changes will be lost. Do you want to proceed without saving?');
+    }
+    return this.recipeForm.pristine;
   }
 }

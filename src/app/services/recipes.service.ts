@@ -40,7 +40,7 @@ export class RecipesService {
           { name: 'Fresh coconut', amount: 1 },
           { name: 'rice flour', amount: 1 }
         ]
-      }
+      },
     ];
   }
 
