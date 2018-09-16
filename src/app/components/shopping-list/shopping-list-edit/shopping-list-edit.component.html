@@ -4,9 +4,16 @@
     <div class="row" [formGroupName]="i">
       <div class="col-md-8">
         <input type="text" class="form-control" formControlName="name">
+        <span *ngIf="shoppingListForm.get('ingredients').at(i).get('name').touched && shoppingListForm.get('ingredients').at(i).get('name').invalid" class="help-block">
+          <span>Name can not be empty</span>
+        </span>
       </div>
       <div class="col-md-2">
         <input type="number" class="form-control" formControlName="amount">
+        <span *ngIf="shoppingListForm.get('ingredients').at(i).get('amount').touched && shoppingListForm.get('ingredients').at(i).get('amount').invalid" class="help-block">
+          <span *ngIf="shoppingListForm.get('ingredients').at(i).get('amount').errors['required']">Amount can not be empty</span>
+          <span *ngIf="shoppingListForm.get('ingredients').at(i).get('amount').errors['min']">Positive amount required</span>
+        </span>
       </div>
       <div class="col-md-2">
         <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i)">X</button>
