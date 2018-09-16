@@ -3,3 +3,8 @@
     font-size: 120%;
     font-family: cursive;
 }
+
+.flash-message-custom{
+    margin: 2px;
+    padding: 0px;   
+}

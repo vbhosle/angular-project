@@ -4,6 +4,7 @@ import { ShoppingListService } from '../../../services/shopping-list.service';
 import { Ingredient } from '../../../models/ingredient.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CanDeactivateGuard } from '../../../can-deactivate-guard.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'shopping-list-edit',
@@ -14,7 +15,10 @@ export class ShoppingListEditComponent implements OnInit, CanDeactivateGuard {
 
   private shoppingListForm: FormGroup;
 
-  constructor(private shoppingListService: ShoppingListService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+              private shoppingListService: ShoppingListService, 
+              private router: Router, private route: ActivatedRoute,
+              private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
     this.shoppingListForm = new FormGroup({
@@ -67,7 +71,12 @@ export class ShoppingListEditComponent implements OnInit, CanDeactivateGuard {
   onSubmit(){
     this.shoppingListService.setShoppingList(this.shoppingListForm.get('ingredients').value);
     this.shoppingListForm.reset(this.shoppingListForm.value);
-    this.router.navigate(['/shopping-list']);
+    this.flashMessagesService.show(
+      `<div class="alert alert-success">
+          <strong><span class="glyphicon glyphicon-saved"></span> Ingredients Saved </strong>
+        </div>`
+      , {cssClass: 'flash-message-custom', timeout: 2000, closeOnClick: true }
+      );
   }
 
   canDeactivate(){

@@ -1,3 +1,4 @@
+<flash-messages></flash-messages>
 <form (ngSubmit)="onSubmit()" [formGroup]="shoppingListForm">
   <h4>Ingredients <button type="button" class="btn btn-success" (click)="onAddIngredient()">Add</button></h4>
   <div class="form-group" formArrayName="ingredients" *ngFor="let ingredientControl of shoppingListForm.get('ingredients').controls;let i =index">
